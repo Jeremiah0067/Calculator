@@ -1,0 +1,106 @@
+import tkinter as tk
+from tkinter import ttk
+
+def press(value):
+    global previous_value
+    global operator
+    global current_value
+    global result
+
+    if value == "AC":
+        # Clear the display and reset the values
+        current_value = "0"
+        previous_value = None
+        operator = None
+        result = None
+        display.configure(text="0")
+    elif value == "=":
+        # Perform the calculation and display the result
+        if previous_value is not None and operator is not None:
+            if operator == "+":
+                result = float(previous_value) + float(current_value)
+            elif operator == "-":
+                result = float(previous_value) - float(current_value)
+            elif operator == "*":
+                result = float(previous_value) * float(current_value)
+            elif operator == "/":
+                result = float(previous_value) / float(current_value)
+            display.configure(text=str(result))
+            previous_value = result
+            current_value = "0"
+            operator = None
+    elif value in ["+", "-", "*", "/"]:
+        # Save the operator and the previous value
+        operator = value
+        previous_value = current_value
+        current_value = "0"
+    else:
+        # Update the current value
+        if current_value == "0":
+            current_value = str(value)
+        else:
+            current_value += str(value)
+        display.configure(text=current_value)
+
+# Create the main window
+window = tk.Tk()
+window.title("Calculator")
+
+# Create a style for the buttons
+style = ttk.Style()
+style.configure("My.TButton", font="helvetica 20")
+
+# Create a frame for the display and buttons
+frame = tk.Frame(window)
+frame.pack()
+
+# Create a display for the calculator
+display = tk.Label(frame, text="0", font="helvetica 36", anchor="e", width=10)
+display.pack()
+
+# Create the buttons
+button1 = ttk.Button(frame, text="1", style="My.TButton", command=lambda: press(1))
+button2 = ttk.Button(frame, text="2", style="My.TButton", command=lambda: press(2))
+button3 = ttk.Button(frame, text="3", style="My.TButton", command=lambda: press(3))
+button4 = ttk.Button(frame, text="4", style="My.TButton", command=lambda: press(4))
+button5 = ttk.Button(frame, text="5", style="My.TButton", command=lambda: press(5))
+button6 = ttk.Button(frame, text="6", style="My.TButton", command=lambda: press(6))
+button7 = ttk.Button(frame, text="7", style="My.TButton", command=lambda: press(7))
+button8 = ttk.Button(frame, text="8", style="My.TButton", command=lambda: press(8))
+button9 = ttk.Button(frame, text="9", style="My.TButton", command=lambda: press(9))
+button0 = ttk.Button(frame, text="0", style="My.TButton", command=lambda: press(0))
+button_decimal = ttk.Button(frame, text=".", style="My.TButton", command=lambda: press("."))
+button_add = ttk.Button(frame, text="+", style="My.TButton", command=lambda: press("+"))
+button_subtract = ttk.Button(frame, text="-", style="My.TButton", command=lambda: press("-"))
+button_multiply = ttk.Button(frame, text="*", style="My.TButton", command=lambda: press("*"))
+button_divide = ttk.Button(frame, text="/", style="My.TButton", command=lambda: press("/"))
+button_equals = ttk.Button(frame, text="=", style="My.TButton", command=lambda: press("="))
+button_clear = ttk.Button(frame, text="AC", style="My.TButton", command=lambda: press("AC"))
+
+# Add the buttons to the frame
+button1.pack(side="left")
+button2.pack(side="left")
+button3.pack(side="left")
+button_add.pack(side="left")
+button4.pack(side="left")
+button5.pack(side="left")
+button6.pack(side="left")
+button_subtract.pack(side="left")
+button7.pack(side="left")
+button8.pack(side="left")
+button9.pack(side="left")
+button_multiply.pack(side="left")
+button_clear.pack(side="left")
+button0.pack(side="left")
+button_decimal.pack(side="left")
+button_equals.pack(side="left")
+button_divide.pack(side="left")
+
+# Initialize the values
+previous_value = None
+operator = None
+current_value = "0"
+result = None
+
+# Start the event loop
+window.mainloop()
