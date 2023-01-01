@@ -92,7 +92,7 @@ button9.pack(side="left")
 button_multiply.pack(side="left")
 button_clear.pack(side="left")
 button0.pack(side="left")
-button_decimal.pack(side="left")
+button_decimal.pack(side="left")add ""
 button_equals.pack(side="left")
 button_divide.pack(side="left")
 
@@ -104,3 +104,4 @@ result = None
 
 # Start the event loop
 window.mainloop()
+  
